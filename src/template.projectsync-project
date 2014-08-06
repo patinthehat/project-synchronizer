@@ -1,0 +1,16 @@
+#!/bin/bash
+
+source "../config"
+
+THISDIR=`dirname $0`
+THISPROJECT=`basename $0`
+THISPROJECT="${THISPROJECT##project-sync-}"
+if [ -z $THISPROJECT ]; then
+  echo "Could not extract project name from script name."
+  exit 1
+fi 
+pushd $THISDIR >/dev/null
+project-sync-to-remotehost $THISPROJECT "$PRJSYNC_REMOTE_TARGET_PATH"
+popd >/dev/null
+
+cd "$THISPROJECT"

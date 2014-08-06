@@ -1,0 +1,18 @@
+
+
+#--- project-sync-to-remote ---
+REMOTE_USERNAME=
+REMOTE_HOSTNAME=
+PROJECTS_DIR="$HOME/Development/projects"
+REMOTE_TARGET_DEFAULT="/home/$REMOTE_USERNAME/projects/php"
+RSYNC_TIMEOUT=120
+PROMPT_BEFORE_SYNC=no
+RSYNC_BIN=`which rsync`
+
+
+
+if [ ! -e $RSYNC_BIN ]; then
+  echo "Error: could not find rsync binary"
+  exit -1
+fi
+

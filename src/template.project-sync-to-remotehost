@@ -1,0 +1,74 @@
+#!/bin/bash
+
+source "../config"
+
+#
+# example:
+# cd ~/Development/projects/PHP
+# project-sync-to-quantum viewsrc /var/www/dev/
+# syncs ~/Development/projects/PHP/viewsrc with /var/www/dev/viewsrc, using local copy as master
+#
+
+function promptuser() {
+  echo -n "$1" ; read ans
+#  echo -n "$@" ; read ans
+  echo "$ans"
+}
+
+#--- config ---
+#REMOTE_USERNAME=patrick
+#REMOTE_HOSTNAME=quantum
+#PROJECTS_DIR="$HOME/Development/projects"
+#REMOTE_TARGET_DEFAULT="/home/$REMOTE_USERNAME/projects/php"
+#RSYNC_TIMEOUT=120
+#PROMPT_BEFORE_SYNC=no
+#RSYNC_BIN="/usr/bin/rsync"
+
+#USEDEFAULT=$(promptuser "Use default remote path '$REMOTE_TARGET_DEFAULT' [Y/n]?")
+#USEDEFAULT=$(isbooltrue $USEDEFAULT)
+USEDEFAULT=1
+#--------------
+
+printf "[1;34mThis will copy local to remote host '$REMOTE_HOSTNAME'.[0m\n"
+if [ PROMPT_BEFORE_SYNC = yes ]; then
+  printf "Press <return> to continue."
+  `promptuser ""`
+fi
+
+
+#PRJDIR="/home/trick/Development/projects/PHP"
+PRJDIR=`dirname $0`
+PRJDIR=`realpath $PRJDIR`
+THISSCRIPT=`basename $0`
+PRJNAME=$1
+PRJTARGET=$2
+
+#echo "\$PRJDIR=$PRJDIR"
+#echo "\$THISSCRIPT=$THISSCRIPT"
+#echo "\$PRJNAME=$PRJNAME"
+#echo "\$PRJTARGET=$PRJTARGET"
+#echo "\$USEDEFAULT=$USEDEFAULT"
+
+if [ -z $PRJNAME ]; then
+  echo "[38;5;196mERROR: usage: $THISSCRIPT <projectname> <remote parent dir>[0m"
+  exit
+fi
+
+if [ -z "$PRJTARGET" ]; then
+  PRJTARGET="$REMOTE_TARGET_DEFAULT"
+#"/home/patrick/projects/php"
+#"/var/www/dev/patrick-projects/php"
+fi
+RSYNCCMD=
+cd $PRJDIR
+
+cd "$PRJDIR/$PRJNAME"
+#--delete-excluded --exclude-from=sync_exclude_filter
+
+echo "[0;37m"
+RSYNC_OPTS="--recursive --timeout=$RSYNC_TIMEOUT --perms --executability -v -l -h -a --stats --compress -t"
+$RSYNC_BIN $RSYNC_OPTS -e "ssh -l $REMOTE_USERNAME" --delete "$PWD/" $REMOTE_HOSTNAME:"$PRJTARGET/$PRJNAME/" | egrep -v "^(File list |Literal data:|Matched data:|Total bytes received:|Number of files:)"  | filter-indent-stdin 
+printf "[0m"
+
+#echo " "
+echo "[1;34mFinished synchronizing local with '$REMOTE_HOSTNAME' server.[0m"
