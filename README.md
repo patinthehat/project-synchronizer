@@ -29,26 +29,33 @@ Example:
 
 ### Building the project  ####
 
-    ##### Dependancies
-          - `rrep` -- replace patterns in files.
+#### Dependancies ####
+      - `rrep` -- replace patterns in files. 
+         Install on debian with `apt-get install rrep`.
       
-      
+**You need to edit _config.defs_ to enter some important configuration details (remote username, etc.).**
 
 `$ ./configure` -- generate some necessary files and configuration variables
-
-_Right now, `configure` also builds the project automatically.  Rhis will change in the future to Makefile support._
+`$ make` -- this will build the scripts.  It calls the _build.sh_ script.
 
 Once the build is complete, copy the two files in _build/_ to your projects folder (i.e.  ~/development/projects).
 To enable synchronized for `project1`, in your main projects directory:
-    `$ ln -s project1 sync-project1`
+    `$ ln -s project1 project-sync-project1`
     and finally,
-    `$ ./sync-project1` will perform the actual directory synchronization.
+    `$ ./project-sync-project1` will perform the actual directory synchronization.
+    
+---
+
+### Notes
+
+  - The `build.sh` shouldn't be called manually, as it is called automatically when you run `make`.
+
     
 ---
 
 ### License
 
-`project-ssyncronize` is released under the [MIT license][LICENSE]
+`project-syncronize` is released under the MIT license (https://github.com/patinthehat/project-synchronizer/blob/master/LICENSE).
 
     
 
