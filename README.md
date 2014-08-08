@@ -35,8 +35,8 @@ Example:
       
 **You need to edit _config.defs_ to enter some important configuration details (remote username, etc.).**
 
-`$ ./configure` -- generate some necessary files and configuration variables  
-`$ make` -- this will build the scripts.  It calls the _build.sh_ script.  
+`$ ./configure` -- generate some necessary files and configuration variables  <br/>
+`$ make` -- this will build the scripts.  It calls the _build.sh_ script.  <br/>
 
 Once the build is complete, copy the two files in _build/_ to your projects folder (i.e.  ~/development/projects).
 To enable synchronized for `project1`, in your main projects directory:
