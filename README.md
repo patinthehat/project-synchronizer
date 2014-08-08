@@ -13,12 +13,12 @@ synchronizer.
 
 
 Example: 
-  `symlink`: 
-    _~/projects/sync-test-project_
-  `project folder`:
-    _~/projects//test-project/_
-  `remote hostname`:
-   _devserver_
+  `symlink`:  
+    _~/projects/sync-test-project_  
+  `project folder`:  
+    _~/projects//test-project/_  
+  `remote hostname`:  
+   _devserver_  
 
   calling `projects/sync-test-project` would use rsync to copy all files or file modifcations to the 
   remote host, _devserver_:  `devserver:/home/remoteuser/projects/test-projects`.
@@ -30,13 +30,13 @@ Example:
 ### Building the project  ####
 
 #### Dependancies ####
-      - `rrep` -- replace patterns in files. 
+      - `rrep` -- replace patterns in files.   
          Install on debian with `apt-get install rrep`.
       
 **You need to edit _config.defs_ to enter some important configuration details (remote username, etc.).**
 
-`$ ./configure` -- generate some necessary files and configuration variables
-`$ make` -- this will build the scripts.  It calls the _build.sh_ script.
+`$ ./configure` -- generate some necessary files and configuration variables  
+`$ make` -- this will build the scripts.  It calls the _build.sh_ script.  
 
 Once the build is complete, copy the two files in _build/_ to your projects folder (i.e.  ~/development/projects).
 To enable synchronized for `project1`, in your main projects directory:
