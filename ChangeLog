@@ -1,6 +1,19 @@
 2014-08-07  trick  <trick.developer@gmail.com>
-
-    * README.,md:  
+    * README.md:  
            - Wrote initial README/documentation, it is now in a readable state.
            
-           
+
+2014-08-08  trick  <trick.developer@gmail.com>
+    * README.md:
+        - Upadated to reflect Makefile changes
+        - Fixed some typos.
+    * configure:
+        - Moved compilation/building of the scripts to a separate build script.
+        - Moved clean() to build.sh
+        - Cleaned up some code
+        - Added status messages as it performs configuration.
+    * build.sh:
+        - Created for to do the actual building of the scripts, for calling from a Makefile.
+    * Makefile:
+        - Modified to clean up code and call the build.sh script.
+    

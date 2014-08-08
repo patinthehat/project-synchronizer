@@ -2,3 +2,4 @@
 - Update the README.md to be more informative, more examples, etc.
 - Create unit tests
 - Add Travis CI support 
+- Clean up the Makefule
